@@ -1,17 +1,15 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "manage.py",
-        "use": "@vercel/python",
-        "config": { "runtime": "python3.10" }
-      }
+        {
+            "src": "doctor_patient_management/wsgi.py",
+            "use": "@vercel/python"
+        }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "manage.py"
-      }
+        {
+            "src": "/(.*)",
+            "dest": "doctor_patient_management/wsgi.py"
+        }
     ]
-  }
-  
+}
