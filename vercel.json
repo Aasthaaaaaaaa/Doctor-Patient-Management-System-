@@ -1,13 +1,19 @@
 {
-    "builds": [{
-        "src": "doctor_patient_management/wsgi.py",
+    "version": 2,
+    "builds": [
+      {
+        "src": "manage.py",
         "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
-    "routes": [
-        {
-            "src": "/users/signup/",
-            "dest": "doctor_patient_management/wsgi.py"
+        "config": {
+          "maxDuration": 10
         }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "manage.py"
+      }
     ]
-}
+  }
+  
