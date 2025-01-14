@@ -6,7 +6,7 @@
     }],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/users/signup/",
             "dest": "doctor_patient_management/wsgi.py"
         }
     ]
