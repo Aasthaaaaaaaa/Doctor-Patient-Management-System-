@@ -4,9 +4,7 @@
       {
         "src": "manage.py",
         "use": "@vercel/python",
-        "config": {
-          "maxDuration": 10
-        }
+        "config": { "runtime": "python3.10" }
       }
     ],
     "routes": [
