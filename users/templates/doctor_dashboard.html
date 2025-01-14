@@ -57,7 +57,10 @@
         <div class="info">
             <p><strong>Username:</strong> {{ user.username }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Address:</strong> {{ user.address_line1 }}, {{ user.city }}, {{ user.state }}, {{ user.pincode }}</p>
+            <p><strong>Address Line 1:</strong> {{ user.address_line1 }}</p>
+            <p><strong>City:</strong> {{ user.city }}</p>
+            <p><strong>State:</strong> {{ user.state }}</p>
+            <p><strong>Pincode:</strong> {{ user.pincode }}</p>
             <p><strong>Type:</strong> Doctor</p>
         </div>
         <button onclick="window.location.href='{% url 'logout' %}'">Logout</button>

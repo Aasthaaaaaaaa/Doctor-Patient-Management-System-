@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from .models import CustomUser
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == 'POST':
@@ -14,6 +15,10 @@ def signup(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
         user_type = request.POST['user_type']
+        address_line1 = request.POST['address_line1']
+        city = request.POST['city']
+        state = request.POST['state']
+        pincode = request.POST['pincode']
 
         # Check if password and confirm password match
         if password != confirm_password:
@@ -25,14 +30,18 @@ def signup(request):
             messages.error(request, "Username already exists!")
             return redirect('signup')
 
-        # Create new user
+        # Create new user with address fields
         user = CustomUser.objects.create_user(
             username=username,
             email=email,
             password=password,
             first_name=first_name,
             last_name=last_name,
-            user_type=user_type
+            user_type=user_type,
+            address_line1=address_line1,
+            city=city,
+            state=state,
+            pincode=pincode
         )
 
         # Log the user in after successful signup
@@ -43,6 +52,7 @@ def signup(request):
 
         # Don't redirect to the dashboard; stay on the signup page
         return render(request, 'signup.html')
+
 
     return render(request, 'signup.html')
 
@@ -70,18 +80,25 @@ def login_view(request):
     return render(request, 'login.html')
 
 
+@login_required
 def doctor_dashboard(request):
-    # Logic for doctor's dashboard
-    # For now, you can simply render a basic template as a placeholder.
-    return render(request, 'doctor_dashboard.html')
+    # Add user to the context
+    return render(request, 'doctor_dashboard.html', {'user': request.user})
 
+@login_required
 def patient_dashboard(request):
-    # Logic for patient's dashboard
-    # For now, you can simply render a basic template as a placeholder.
-    return render(request, 'patient_dashboard.html')
+    # Add user to the context
+    return render(request, 'patient_dashboard.html', {'user': request.user})
 
 def logout_view(request):
     # Logout the user
     logout(request)
     messages.success(request, "You have been logged out successfully!")
     return redirect('login')  # Redirect to the login page after logout
+
+
+from django.shortcuts import redirect
+
+def landing_page(request):
+    # Redirect to the signup page
+    return redirect('signup')  # Make sure 'signup' is the correct name for your signup URL

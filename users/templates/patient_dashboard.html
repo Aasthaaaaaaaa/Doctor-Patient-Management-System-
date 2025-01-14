@@ -54,25 +54,20 @@
     <div class="dashboard">
         
         <h2>Welcome, {{ user.first_name }} {{ user.last_name }}</h2>
+        
+        
+
         <div class="info">
             <p><strong>Username:</strong> {{ user.username }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Address:</strong>
-                {% if user.address_line1 %}
-                    {{ user.address_line1 }},
-                {% endif %}
-                {% if user.city %}
-                    {{ user.city }},
-                {% endif %}
-                {% if user.state %}
-                    {{ user.state }},
-                {% endif %}
-                {% if user.pincode %}
-                    {{ user.pincode }}
-                {% endif %}
-            </p>
+            <p><strong>Address Line 1:</strong> {{ user.address_line1 }}</p>
+<p><strong>City:</strong> {{ user.city }}</p>
+<p><strong>State:</strong> {{ user.state }}</p>
+<p><strong>Pincode:</strong> {{ user.pincode }}</p>
+
             <p><strong>Type:</strong> Patient</p>
         </div>
+        
         <button onclick="window.location.href='{% url 'logout' %}'">Logout</button>
 
     </div>

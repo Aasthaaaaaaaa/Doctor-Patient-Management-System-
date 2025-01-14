@@ -2,23 +2,17 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class CustomUser(AbstractUser):
-    # Define user types (doctor or patient)
-    USER_TYPES = (
+    user_type_choices = [
         ('doctor', 'Doctor'),
         ('patient', 'Patient'),
-    )
-    
-    # Field to store the user type (doctor or patient)
-    user_type = models.CharField(max_length=10, choices=USER_TYPES, default='patient')
+    ]
 
-    # Other fields for the user's details
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    address_line1 = models.CharField(max_length=255)
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=6)
-    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    user_type = models.CharField(max_length=10, choices=user_type_choices)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    address_line1 = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    state = models.CharField(max_length=100, blank=True, null=True)
+    pincode = models.CharField(max_length=6, blank=True, null=True)
 
     def __str__(self):
         return self.username
